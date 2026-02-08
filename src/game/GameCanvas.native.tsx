@@ -2,7 +2,7 @@ import { Canvas } from '@react-three/fiber/native';
 import { StyleSheet, View } from 'react-native';
 
 import { GAME_CONFIG } from './config';
-import { Scene } from './Scene';
+import { ActiveScene } from './entry';
 
 export function GameCanvas() {
   return (
@@ -11,7 +11,7 @@ export function GameCanvas() {
         style={styles.canvas}
         camera={GAME_CONFIG.camera}
         gl={{ antialias: true }}>
-        <Scene />
+        <ActiveScene />
       </Canvas>
     </View>
   );

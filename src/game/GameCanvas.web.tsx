@@ -2,13 +2,13 @@ import { Canvas } from '@react-three/fiber';
 import { StyleSheet, View } from 'react-native';
 
 import { GAME_CONFIG } from './config';
-import { Scene } from './Scene';
+import { ActiveScene } from './entry';
 
 export function GameCanvas() {
   return (
     <View style={styles.container}>
       <Canvas style={styles.canvas} camera={GAME_CONFIG.camera}>
-        <Scene />
+        <ActiveScene />
       </Canvas>
     </View>
   );

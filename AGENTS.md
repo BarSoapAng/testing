@@ -32,6 +32,45 @@ You must not:
 - Do not create geometries or materials inside `useFrame`.
 - Assume mobile performance constraints even when targeting web.
 
+## Examples
+Example: `useFrame` allocation  
+Good:
+```ts
+const temp = useMemo(() => new Vector3(), []);
+useFrame(() => {
+  temp.set(1, 2, 3);
+  meshRef.current?.position.copy(temp);
+});
+```
+Bad:
+```ts
+useFrame(() => {
+  const temp = new Vector3(1, 2, 3);
+  meshRef.current?.position.copy(temp);
+});
+```
+
+Example: scene-local vs module-global state  
+Good:
+```ts
+export function Scene() {
+  const [score, setScore] = useState(0);
+  // ...
+}
+```
+Bad:
+```ts
+let score = 0;
+export function Scene() {
+  score += 1;
+  // ...
+}
+```
+
+Example: correct vs incorrect file placement  
+Good: `src/game/Player.tsx`  
+Bad: `components/Player.tsx` or `src/ui/Player.tsx`
+
 ## Asset Usage Rules
 - Assets must be local files under `assets/`.
 - Do not reference remote assets or URLs.
@@ -50,6 +89,14 @@ Changes must leave the project runnable within this template. The system prompt 
 ## Incremental Change Contract
 - Changes must be incremental: one new mechanic or system at a time.
 - Broad refactors are not allowed.
+
+## Change Checklist
+- Changes confined to `src/game/**` unless explicitly requested.
+- `App.tsx` and `src/game/index.ts` untouched unless explicitly requested.
+- No new dependencies or devDependencies; no edits to `package.json` or `package-lock.json` unless explicitly requested.
+- No navigation, routing, or multi-screen flows added.
+- Assets are local under `assets/` (no remote URLs).
+- No per-frame allocations or geometry/material creation inside `useFrame`.
 
 ## Final Authority
 If unsure, do not modify code. Ask for clarification.
