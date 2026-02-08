@@ -1,0 +1,55 @@
+# AGENTS.md
+
+## Authority
+AGENTS.md is a project-local constraint layer that narrows behavior beyond the global system prompt. If AGENTS.md conflicts with the system prompt, AGENTS.md takes precedence for this repository.
+
+## Project Scope
+This repository is a single-screen Expo + Three.js template for 3D game building.
+
+## File Stability Levels
+- Stable (do not modify unless instructed): `App.tsx`, `src/game/index.ts`
+- Extensible (preferred for changes): `src/game/**`
+- Asset-only: `assets/**`
+
+## Allowed Change Types
+You may:
+- Add new components or systems under `src/game/`.
+- Extend `src/game/Scene.tsx` or replace it with a new scene entry.
+
+You must not:
+- Introduce navigation, routing, or multi-screen flows.
+- Reorganize directories.
+- Rename public exports.
+
+## Data Flow Rules
+- Game state must be scene-local by default (React state, refs, or local hooks in `src/game/**`).
+- Shared module state is allowed only when required and must live in `src/game/` with clear ownership and reversible side effects.
+- Per-frame logic must be placed inside `useFrame` only.
+- Side effects must be isolated and reversible; avoid global mutable state.
+
+## Performance Rules (Mobile-First)
+- Reuse vectors, refs, and objects; do not allocate per-frame in `useFrame`.
+- Do not create geometries or materials inside `useFrame`.
+- Assume mobile performance constraints even when targeting web.
+
+## Asset Usage Rules
+- Assets must be local files under `assets/`.
+- Do not reference remote assets or URLs.
+- Placeholder assets are allowed only when required for a task.
+- Keep assets small and minimal: default limit is 5 new assets, each = 1 MB, unless explicitly requested otherwise.
+
+## What Not to Build (Non-Goals)
+Do not add any of the following unless explicitly requested:
+- Menus, editors, or HUD systems.
+- Physics engines.
+- Multiplayer or networking features.
+
+## Verification
+Changes must leave the project runnable within this template. The system prompt requires verification when appropriate; this repository assumes verification before task completion.
+
+## Incremental Change Contract
+- Changes must be incremental: one new mechanic or system at a time.
+- Broad refactors are not allowed.
+
+## Final Authority
+If unsure, do not modify code. Ask for clarification.
