@@ -21,6 +21,11 @@ You must not:
 - Reorganize directories.
 - Rename public exports.
 
+## Native Modules (Platform-Specific)
+- Import or use native modules only from `*.native.ts` or `*.native.tsx` files.
+- Do not import native modules from shared files or `*.web.*` files, even with `Platform` guards.
+- Use platform-specific file splits (e.g., `Thing.native.tsx` / `Thing.web.tsx`) to isolate native dependencies.
+
 ## Data Flow Rules
 - Game state must be scene-local by default (React state, refs, or local hooks in `src/game/**`).
 - Shared module state is allowed only when required and must live in `src/game/` with clear ownership and reversible side effects.
