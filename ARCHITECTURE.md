@@ -38,7 +38,6 @@ This repository is a single-screen Expo + Three.js template for 3D game building
 ├─ src/                      # Source root for app/game code.
 │  └─ game/                  # Game runtime code (preferred extension point).
 │     ├─ config.ts           # Camera, lighting, and color defaults.
-│     ├─ GameCanvas.native.tsx # Native canvas wiring (@react-three/fiber/native).
 │     ├─ GameCanvas.web.tsx  # Web canvas wiring (@react-three/fiber).
 │     ├─ index.ts            # Re-exports GameCanvas for App.tsx.
 │     └─ Scene.tsx           # Default scene and per-frame updates.
